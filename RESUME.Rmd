@@ -1,0 +1,143 @@
+---
+title: "Resume"
+author: "Jorge Eduardo Trujillo Velázquez"
+date: "`r Sys.Date()`"
+
+output:
+  pagedown::html_resume:
+    toc: true
+    # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render:
+    self_contained: true
+    # to produce HTML and PDF in RStudio:
+    knit: pagedown::chrome_print
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(results='asis', #formato de añadir info a la derecha
+                      echo = TRUE)
+source("parsing_functions.R")
+
+PAGEDOWN_DF <- CREATING_DFS()$PAGEDOWN_DF
+```
+
+Aside
+================================================================================
+
+![logo](C:/Users/actje/Dropbox/CV/IMAGES/yo.png){width=100%}
+
+<br><br>
+
+### Contact Info
+
+- <i class="fa fa-envelope"></i> act.jetv@gmail.com
+
+- <i class="fa fa-github"></i> [GitHub: Eduardo Trujillo](https://github.com/1Edtrujillo1)
+
+- <i class="fa fa-phone"></i> 55 44 48 10 29
+
+- For more information, please contact me via email or phone.
+
+
+Main
+================================================================================
+
+Jorge Eduardo Trujillo Velázquez {#title}
+--------------------------------------------------------------------------------
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r, echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDU')
+```
+
+Certifications {data-icon=award}
+--------------------------------------------------------------------------------
+
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
+```
+
+::: aside
+
+### Summary 
+
+<i class="fas fa-graduation-cap"></i> Bachelor Degree in Actuarial Science at [Universidad Nacional Autonoma de México](https://www.unam.mx/)
+
+- <i class="fab fa-r-project"></i> `R enthusiast` 
+
+- 
+```{r echo=FALSE, out.width="7%"}
+knitr::include_graphics("IMAGES/persistent.png")
+```
+`Persistent`
+
+- <i class="far fa-address-book"></i> `Orginized`
+
+- 
+```{r echo=FALSE, out.width="8%"}
+knitr::include_graphics("IMAGES/good_teammate.png")
+```
+`Good teammate`
+
+- 
+```{r echo=FALSE, out.width="8%"}
+knitr::include_graphics("IMAGES/commited.png")
+```
+`Commited`
+
+- 
+```{r echo=FALSE, out.width="8%"}
+knitr::include_graphics("IMAGES/honest.png")
+```
+`Honest`
+
+<br><br>
+
+### Skills 
+
+```{r echo=FALSE, out.width="300%"}
+knitr::include_graphics("IMAGES/plot.png")
+```
+
+<br><br>
+
+### Language Skills 
+
+```{r echo=FALSE, out.width="10%"}
+knitr::include_graphics("IMAGES/mexican_flag.png")
+```
+**Spanish:** Native
+
+```{r echo=FALSE, out.width="10%"}
+knitr::include_graphics("IMAGES/england_flag.png")
+```
+**English:** Proficient
+
+:::
+
+Work Experience {data-icon=share-alt}
+--------------------------------------------------------------------------------
+
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
+```
+
+Projects {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJE')
+```
+
+
+Timeline {data-icon=chart-line}
+--------------------------------------------------------------------------------
+
+```{r, echo=FALSE, warning=FALSE}
+TIME_LINE_PLOT (CREATING_DFS()$TIME_LINE_DF, 
+                titulo = "Curriculum Vitae Timeline",
+                subtitulo = "Jorge Eduardo Trujillo Velázquez")
+```
+
