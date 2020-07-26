@@ -20,4 +20,3 @@ This program lets you create a nice CV based on your personal information saved 
 12. usethis
 13. devtools
 14. lares
-15. glue

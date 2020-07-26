@@ -5,15 +5,15 @@ library(purrr)
 map(c("jsonlite","stringr", "data.table", "dplyr",
       "glue", "lubridate", "ggplot2","magick", 
       "pagedown", "scales", "cowplot", "usethis",
-      "devtools", "lares", "glue"), 
+      "devtools", "lares"), 
     require, character.only = TRUE)
 
-#' @Regex: define the possible regex to get a text from string of an observation
+#' @Regex: define the possible regex to get a text from string (an observation)
 #' @Useful: in  HTTP_LINK and CREATING_DFS functions
 regex <- list(
-  regex_left = ".*(?=[\\[])", #everything before [
+  regex_left = ".*(?=\\[)", #everything before [
   regex_inside = "(?<=\\[)(.*?)(?=\\])", #everything between []
-  regex_after = "(?<=\\)).*" #everything after ]
+  regex_after = "(?<=\\)).*" #everything after )
 )
 
 bracket_regex <- glue("^\\[{regex$regex_inside}\\]") #start with [text]
