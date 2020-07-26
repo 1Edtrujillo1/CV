@@ -1,21 +1,21 @@
 ---
-title: "Resume"
-author: "Jorge Eduardo Trujillo Velázquez"
+title: "Eduardo Resume"
+author: Jorge Eduardo Trujillo Velázquez
 date: "`r Sys.Date()`"
-
 output:
   pagedown::html_resume:
-    toc: true
-    # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render:
+    css: ['custome_resume.css', 'resume']
+    # set it to true for a self-contained HTML page but it'll take longer to render
     self_contained: true
-    # to produce HTML and PDF in RStudio:
-    knit: pagedown::chrome_print
+# to produce PDF in RStudio:    
+knit: pagedown::chrome_print
 ---
 
-```{r setup, include=FALSE}
-
-knitr::opts_chunk$set(results='asis', #formato de añadir info a la derecha
-                      echo = TRUE)
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis',  #formato de añadir info a la derecha
+  echo = FALSE
+)
 source("parsing_functions.R")
 
 PAGEDOWN_DF <- CREATING_DFS()$PAGEDOWN_DF
@@ -24,20 +24,28 @@ PAGEDOWN_DF <- CREATING_DFS()$PAGEDOWN_DF
 Aside
 ================================================================================
 
-![logo](C:/Users/actje/Dropbox/CV/IMAGES/yo.png){width=100%}
+![logo](IMAGES/yo.png){width=100%}
 
-<br><br>
+## Contact Info
 
-### Contact Info
+- <i class="fas fa-globe-americas"></i> Mexican
+
+- <i class="fas fa-male"></i> 24 years old
 
 - <i class="fa fa-envelope"></i> act.jetv@gmail.com
 
 - <i class="fa fa-github"></i> [GitHub: Eduardo Trujillo](https://github.com/1Edtrujillo1)
 
-- <i class="fa fa-phone"></i> 55 44 48 10 29
+- <i class="fa fa-phone"></i> +52 55 44 48 10 29
 
 - For more information, please contact me via email or phone.
 
+### Skills 
+```{r echo=FALSE, out.width="300%"}
+knitr::include_graphics("IMAGES/plot.png")
+```
+
+<br><br>
 
 Main
 ================================================================================
@@ -47,14 +55,12 @@ Jorge Eduardo Trujillo Velázquez {#title}
 
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
-
 ```{r, echo=FALSE}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDU')
 ```
 
 Certifications {data-icon=award}
 --------------------------------------------------------------------------------
-
 ```{r,echo=FALSE}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
 ```
@@ -67,7 +73,7 @@ PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
 
 - <i class="fab fa-r-project"></i> `R enthusiast` 
 
-- 
+-
 ```{r echo=FALSE, out.width="7%"}
 knitr::include_graphics("IMAGES/persistent.png")
 ```
@@ -87,7 +93,7 @@ knitr::include_graphics("IMAGES/commited.png")
 ```
 `Commited`
 
-- 
+-
 ```{r echo=FALSE, out.width="8%"}
 knitr::include_graphics("IMAGES/honest.png")
 ```
@@ -95,16 +101,7 @@ knitr::include_graphics("IMAGES/honest.png")
 
 <br><br>
 
-### Skills 
-
-```{r echo=FALSE, out.width="300%"}
-knitr::include_graphics("IMAGES/plot.png")
-```
-
-<br><br>
-
 ### Language Skills 
-
 ```{r echo=FALSE, out.width="10%"}
 knitr::include_graphics("IMAGES/mexican_flag.png")
 ```
@@ -115,29 +112,36 @@ knitr::include_graphics("IMAGES/england_flag.png")
 ```
 **English:** Proficient
 
-:::
+<br><br><br><br><br><br>
 
-Work Experience {data-icon=share-alt}
+- Watch some <i class="fas fa-users"></i> [**recommendation letters**](https://www.dropbox.com/sh/u1dr5se4brf55m2/AADKONJy60EgROnXlPBD8iXYa?dl=0)
+
+- Code available on <i class="fa fa-github"></i> [GitHub](https://github.com/1Edtrujillo1/CV).
+
+::: 
+
+Work Experience {data-icon=briefcase}
 --------------------------------------------------------------------------------
-
 ```{r,echo=FALSE}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
 ```
 
 Projects {data-icon=laptop}
 --------------------------------------------------------------------------------
-
 ```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJE')
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJ')
 ```
 
+Publications {data-icon=book-open}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('PUBL')
+```
 
 Timeline {data-icon=chart-line}
 --------------------------------------------------------------------------------
-
 ```{r, echo=FALSE, warning=FALSE}
-TIME_LINE_PLOT (CREATING_DFS()$TIME_LINE_DF, 
-                titulo = "Curriculum Vitae Timeline",
+TIME_LINE_PLOT (titulo = "Curriculum Vitae Timeline",
                 subtitulo = "Jorge Eduardo Trujillo Velázquez")
 ```
 

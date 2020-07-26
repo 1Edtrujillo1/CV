@@ -12,6 +12,8 @@
 
 # Crate stickers with R: https://cran.r-project.org/web/packages/magick/vignettes/intro.html
 
+#<br><br> make separations in the web page
+
 # install.packages("usethis")
 # install.packages('devtools')
 # devtools::install_github("laresbernardo/lares")
