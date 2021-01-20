@@ -1,0 +1,232 @@
+{
+    "EDU": {
+        "TITLE": [
+            "[Bsc. In Actuarial Science](https://www.dropbox.com/s/mldenb2tyxk86pj/college_grades.pdf?dl=0&raw=1)",
+            "[Graduate Diploma in Statistics](https://www.dropbox.com/s/o01sadxq4ul7w8b/graduated_diploma_statistics.pdf?dl=0&raw=1)"
+        ],
+        "LOCATION": [
+            "Mexico",
+            "Mexico"
+        ],
+        "INSTITUTION": [
+            "UNAM",
+            "UNAM"
+        ],
+        "DESCRIPTION": [
+            "Analyze mathematical models with the intention to predict and evaluate economical and social problems that involve risks.",
+            "Using theoretical and practical concepts of Statistics to analyze and interpret data in an investigational and professional environment."
+        ],
+        "START": [
+            "2015-08-06",
+            "2019-01-20"
+        ],
+        "END": [
+            "2018-11-23",
+            "2019-11-20"
+        ]
+    },
+    "CERT": {
+        "TITLE": [
+            "[Regression Models](https://www.dropbox.com/s/17lapazknazm5mq/regression_models.pdf?dl=0&raw=1)",
+            "[Diploma in Statistics with R](https://www.dropbox.com/s/n8ymrmvihauy79k/diploma_statistics_r.pdf?dl=0&raw=1)",
+            "[Carreer track in Data Science with R](https://www.dropbox.com/s/pufvtx6c3xm7gyo/career_track_R.pdf?dl=0&raw=1)",
+            "[Spark with R](https://www.dropbox.com/s/zhr1pxy7r41brlw/Introduction%20to%20Spark%20with%20sparklyr.pdf?dl=0&raw=1)",
+            "[Parallel Programming](https://www.dropbox.com/s/7ocxgui63cfsb7g/Parallel%20Programming%20in%20R.pdf?dl=0&raw=1)",
+            "[Shiny Certificates](https://www.dropbox.com/s/miql63265ihtgl6/Building%20Web%20Applications%20with%20Shiny.pdf?dl=0&raw=1)",
+            "[AWS & Shiny Certificate](https://www.dropbox.com/s/ch2y3o1te7t5r6i/certificate_aws.pdf?dl=0&raw=1)",
+            "Carreer track in Data Science with PYTHON",
+            "[SQL for Data Science](https://www.dropbox.com/s/cjk27itr4g3mskc/Joining%20Data%20in%20PostgreSQL.pdf?dl=0&raw=1)",
+            "[Git for Data Science](https://www.dropbox.com/s/w2obgy7xhmorxws/Introduction%20to%20Git%20for%20Data%20Science.pdf?dl=0&raw=1)",
+            "[SHELL for Data Science](https://www.dropbox.com/s/ru13zgfmwu6j1y9/Introduction%20to%20Shell.pdf?dl=0&raw=1)",
+            "[TOEFL home edition](https://www.dropbox.com/s/mabzy32norevbtk/TOEFL_IBT.pdf?dl=0&raw=1)"
+        ],
+        "LOCATION": [
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online",
+            "Online"
+        ],
+        "INSTITUTION": [
+            "J. Hopkins Uni.",
+            "I. Society for Computaion Bio.",
+            "DataCamp",
+            "DataCamp",
+            "DataCamp",
+            "DataCamp",
+            "Business Science Uni.",
+            "DataCamp",
+            "DataCamp",
+            "DataCamp",
+            "DataCamp",
+            "ETS"
+        ],
+        "DESCRIPTION": [
+            "Using linear models as statistical analysis, relating an outcome to a set of predictors of interest using linear assumptions.",
+            "Analyzing Statistical models with R software.",
+            "Statistical and machine learning techniques with [**R programming**](https://www.dropbox.com/sh/qshwr2ilel4o2ko/AAC-0qYiwp6QURUEraz12Jrha?dl=0) to analyze and interpret complex data.",
+            "Learning sparklyr package to code R code on a Spark cluster.",
+            "Understand parallel computing methods to provide reproducibility solutions.",
+            "Build [**interactive web apps**](https://www.dropbox.com/sh/qf8njlrm5jyedxh/AAAXwm78sodViKO8lhWbd5Rka?dl=0) directly in R to explore data as dashboards and visualizations.",
+            "Build scalable applications using Shiny and AWS Cloud Technology.",
+            "Statistical and machine learning techniques with [**Python programming**](https://www.dropbox.com/sh/z9hd4h2xopbx800/AAAP4DKO-tb23eNO39aQoQrGa?dl=0) to analyze and interpret complex data.",
+            "Understanding querying tables in relational databases in [**SQL language**](https://www.dropbox.com/sh/ev673l385540tlq/AAA9nKr61R5OlyN9xMkgHcGfa?dl=0).",
+            "Understanding Version Control to keep track of repositories created in GitHub.",
+            "Learn the Unix command line to combine and run existing programs on clusters and clouds.",
+            "Evaluate the [**English proficiency**](https://www.dropbox.com/sh/uowny83ja9dpy7y/AAAZmAk_XphjJEipo5BA6df3a?dl=0) whose native language is not English."
+        ],
+        "START": [
+            "2020-01-20",
+            "2019-04-22",
+            "2019-01-01",
+            "2020-11-05",
+            "2020-10-28",
+            "2019-07-19",
+            "2020-06-24",
+            "2020-01-01",
+            "2018-02-17",
+            "2020-01-15",
+            "2020-11-02",
+            "2020-07-14"
+        ],
+        "END": [
+            "2020-08-31",
+            "2019-10-26",
+            "2020-01-28",
+            "2021-01-09",
+            "2021-01-10",
+            "2020-04-22",
+            "2021-01-05",
+            "today",
+            "2018-07-26",
+            "2020-02-04",
+            "2021-01-11",
+            "2020-07-14"
+        ]
+    },
+    "WORK": {
+        "TITLE": [
+            "Intership in technology department",
+            "Jr. Consultant",
+            "Statistician"
+        ],
+        "LOCATION": [
+            "Mexico",
+            "Mexico",
+            "Mexico"
+        ],
+        "INSTITUTION": [
+            "[UNAM](https://www.unam.mx/)",
+            "[RitterDragon](http://ritterdragon.com/)",
+            "[Nielsen](https://www.nielsen.com/us/en/)"
+        ],
+        "DESCRIPTION": [
+            "Using financial and statistical methods to reduce depreciation in operative systems in the technology department.",
+            "Applying techniques of Data mining to prepare and manipulate data with SQL and show visualizations to Clients.",
+            "Executes and analyzes the processes of Statistical Operations and associated project work for Brasil. Applying universe estimations, sample design, quality controls and statistical concepts in data analysis."
+        ],
+        "START": [
+            "2017-08-14",
+            "2018-05-13",
+            "2019-01-23"
+        ],
+        "END": [
+            "2018-02-14",
+            "2018-12-11",
+            "2020-12-23"
+        ]
+    },
+    "PROJ": {
+        "TITLE": [
+            "[Maps with leaflet](https://github.com/1Edtrujillo1/Websraping)",
+            "[Webscraping](https://github.com/1Edtrujillo1/Websraping)",
+            "Transfer SAS programs to R",
+            "R, Python, Shell, Git guide",
+            "[Personal Library](https://github.com/1Edtrujillo1/LIBRARY)",
+            "[Time series Web Application](http://shiny.aijetv.com/)",
+            "[K Means Web Application](https://github.com/1Edtrujillo1/HACKATHON-2020)",
+            "[Company Web Application](https://github.com/1Edtrujillo1/BUSINESS-PROJECT/tree/Working)"
+        ],
+        "LOCATION": [
+            "Mexico",
+            "Mexico",
+            "Mexico",
+            "Mexico",
+            "Mexico",
+            "Mexico",
+            "Mexico"
+        ],
+        "INSTITUTION": [
+            "My self",
+            "My self",
+            "My self",
+            "My self",
+            "My self",
+            "My self",
+            "My self"
+        ],
+        "DESCRIPTION": [
+            "Using leaflet R package to create interactive maps to interpret geo-spatial data.",
+            "Extract information on different web pages to create a different kinds of analysis.",
+            "Create programs in R that were in SAS language.",
+            "Create Data Science guide, starting with basic and end with advanced concepts.",
+            "Create an interactive library to find in a quickly way your pdf files.",
+            "Create an interactive analysis where thanks to an API visualize different prices on the stock exchange.",
+            "Create an interactive cluster analysis in a logistic company.",
+            "Create an interactive dashboard with all the necessary statistics that a company needs."
+        ],
+        "START": [
+            "2019-06-23",
+            "2019-05-12",
+            "2019-08-03",
+            "2019-09-07",
+            "2020-04-06",
+            "2020-07-09",
+            "2020-08-29",
+            "2020-05-05"
+        ],
+        "END": [
+            "2019-08-29",
+            "2019-09-15",
+            "2019-12-23",
+            "today",
+            "2020-04-06",
+            "2021-01-02",
+            "2020-12-01",
+            "today"
+        ]
+    },
+    "PUBL": {
+        "TITLE": [
+            "[Automatization of processes in Brazil](https://www.dropbox.com/s/x19xf28bqr8yt42/Trabajo_Profesional.pdf?dl=0&raw=1)",
+            "[R package](https://github.com/1Edtrujillo1/udeploy)"
+        ],
+        "LOCATION": [
+            "Mexico",
+            "Mexico"
+        ],
+        "INSTITUTION": [
+            "UNAM",
+            "My self"
+        ],
+        "DESCRIPTION": [
+            "[**Automatize**](https://b0glfezn7qzsdncbsrlpzq-on.drv.tw/www.jetvtitulacion.com/presentation.html) in an easy and faster way the recollection of information for a company to analyze the data.",
+            "**udeploy** R package to make automatic analysis and interactive shiny functions."
+        ],
+        "START": [
+            "2019-11-20",
+            "2020-05-05"
+        ],
+        "END": [
+            "2020-04-06",
+            "today"
+        ]
+    }
+}

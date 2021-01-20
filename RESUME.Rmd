@@ -8,7 +8,7 @@ output:
     # set it to true for a self-contained HTML page but it'll take longer to render
     self_contained: true
 # to produce PDF in RStudio:    
-#knit: pagedown::chrome_print
+knit: pagedown::chrome_print
 ---
 
 ```{r, include=FALSE}
@@ -34,18 +34,18 @@ Aside
 
 - <i class="fa fa-envelope"></i> act.jetv@gmail.com
 
-- <i class="fa fa-github"></i> [GitHub: Eduardo Trujillo](https://github.com/1Edtrujillo1)
+- <i class="fas fa-globe"></i> [AImagination.com](www.aijetv.com)
 
 - <i class="fa fa-phone"></i> +52 55 44 48 10 29
 
-- For more information, please contact me via email or phone.
+- <i class="fa fa-github"></i> [GitHub](https://github.com/1Edtrujillo1)
 
-### Skills 
-```{r echo=FALSE, out.width="300%"}
-knitr::include_graphics("IMAGES/plot.png")
-```
+- <i class="fab fa-docker"></i> [DockerHub](https://hub.docker.com/u/1edtrujillo1)
 
-<br><br>
+- <i class="fab fa-r-project"></i> [Udeploy R-package](https://github.com/1Edtrujillo1/udeploy)
+
+- For more information, please contact me via <strong>email</strong> or <strong>phone</strong>.
+
 
 Main
 ================================================================================
@@ -59,13 +59,38 @@ Education {data-icon=graduation-cap data-concise=true}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDU')
 ```
 
-Certifications {data-icon=award}
+Work Experience {data-icon=briefcase}
 --------------------------------------------------------------------------------
 ```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
+```
+
+Publications {data-icon=book-open}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('PUBL')
 ```
 
 ::: aside
+
+<br><br><br><br><br><br>
+
+### Skills 
+```{r echo=FALSE, out.width="300%"}
+knitr::include_graphics("IMAGES/plot.png")
+```
+
+::: 
+
+Projects {data-icon=laptop}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJ')
+```
+
+::: aside
+
+<br><br><br>
 
 ### Summary 
 
@@ -99,7 +124,7 @@ knitr::include_graphics("IMAGES/honest.png")
 ```
 `Honest`
 
-<br><br>
+<br><br><br><br><br><br><br><br><br><br>
 
 ### Language Skills 
 ```{r echo=FALSE, out.width="10%"}
@@ -112,31 +137,23 @@ knitr::include_graphics("IMAGES/england_flag.png")
 ```
 **English:** Proficient
 
-<br><br><br><br><br><br>
+:::
+
+Certifications {data-icon=award}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
+```
+
+::: aside
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 - Watch some <i class="fas fa-users"></i> [**recommendation letters**](https://www.dropbox.com/sh/u1dr5se4brf55m2/AADKONJy60EgROnXlPBD8iXYa?dl=0)
 
 - Code available on <i class="fa fa-github"></i> [GitHub](https://github.com/1Edtrujillo1/CV).
 
-::: 
-
-Work Experience {data-icon=briefcase}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
-```
-
-Projects {data-icon=laptop}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJ')
-```
-
-Publications {data-icon=book-open}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('PUBL')
-```
+:::
 
 Timeline {data-icon=chart-line}
 --------------------------------------------------------------------------------

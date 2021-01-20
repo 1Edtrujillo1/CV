@@ -275,7 +275,7 @@ TIME_LINE_PLOT <- function(titulo, subtitulo){
     
     theme_lares2()  + #pondra letra bonita
     
-    geom_label(aes(x = LABEL_POS), colour = "black", size = 3, alpha = 0.3) +  #label in each line
+    geom_label(aes(x = LABEL_POS), colour = "black", size = 1.8, alpha = 0.3) +  #label in each line
     
     geom_vline(xintercept = max(df$TIME), alpha = 0.8, linetype = "dotted") + #ultima linea vertical del plot
     
@@ -315,11 +315,15 @@ SKILLS_PLOT <- function(){
   options(warn = -1)
   
   DF_SKILLS <- data.table(
-    SKILLS = c(rep("R", 5), rep("PYTHON", 4), rep("SQL", 4), rep("GIT", 4),
-               rep("MARKDOWN", 5), rep("CSS", 4), rep("OFFICE", 3)) %>% 
+    SKILLS = map2(list(c("SPARK", "OFFICE"), 
+                       c("BOOSTRAP", "CSS", "GIT", 
+                         "DOCKER", "AWS", "PYTHON", 
+                         "SQL", "SHELL", "MONGODB"),
+                       c("R", "SHINY", "RMARKDOWN")),
+                  3:5, function(i,j)
+                    map(i, ~rep(.x, j)) %>% flatten_chr()) %>% flatten_chr() %>% 
       as.factor()) %>% 
     .[,ID:=1:.N, by = "SKILLS"]
-  
   
   DF_PERCENTACE_SKILLS <- DF_SKILLS[,.(ID,PERCENTAGE = .N/5.2), by = "SKILLS"] %>% 
     .[,.SD[.N], by = "SKILLS"] 
@@ -338,22 +342,29 @@ SKILLS_PLOT <- function(){
     theme_void() + 
     theme(panel.background = element_rect(fill = '#f7fbff')) #background color
   
-  
-  paths_axis <- str_c("IMAGES", 
-                      str_subset(string = list.files("IMAGES"), 
-                                 pattern = "(?:css.*|git.*|markdown.*|office.*|python.*|R.*|sql.*)") %>% 
+  paths_axis <- str_c("IMAGES",
+                      str_subset(string = list.files("IMAGES"),
+                                 pattern = "(?:spark.*|office.*|boostrap.*|css.*|git.*|docker.*|aws.*|python.*|sql.*|shell.*|mongo.*|R.png|shiny.*|markdown.*)") %>%
                         sort(),
-                      sep = "/") %>% as.list() %>% 
-    set_names(c("CSS", "GIT", "MARKDOWN", "OFFICE", "PYTHON", "R", "SQL"))
+                      sep = "/") %>% as.list() %>%
+    set_names(c("AWS", "BOOSTRAP", "CSS", "DOCKER", "GIT", "MARKDOWN", "MONGODB",
+                "OFFICE", "PYTHON", "R", "SHELL", "SHINY", "SPARK", "SQL"))
   
-  PIMAGE <-  axis_canvas(plot = PLOT, axis = 'y') +     #each selected image to be the y axis
-    draw_image(paths_axis$SQL, y = 5.3, scale = 0.8) +
-    draw_image(paths_axis$R, y = 4.5, scale = 0.7) +
-    draw_image(paths_axis$PYTHON, y = 3.7, scale = 0.6) +
-    draw_image(paths_axis$OFFICE, y = 2.9, scale = 0.5) +
-    draw_image(paths_axis$MARKDOWN, y = 2.2, scale = 0.8) +
-    draw_image(paths_axis$GIT, y = 1.4, scale = 0.6) +
-    draw_image(paths_axis$CSS, y = 0.7, scale = 0.6)
+  PIMAGE <- axis_canvas(plot = PLOT, axis = 'y') +     #each selected image to be the y axis
+    draw_image(paths_axis$SQL, y = 5.55, scale = 0.4) + 
+    draw_image(paths_axis$SPARK, y = 5.15, scale = 0.4) + 
+    draw_image(paths_axis$SHINY, y = 4.8, scale = 0.35) + 
+    draw_image(paths_axis$SHELL, y = 4.4, scale = 0.33) + 
+    draw_image(paths_axis$MARKDOWN, y = 4.0, scale = 0.35) + 
+    draw_image(paths_axis$R, y = 3.6, scale = 0.3) + 
+    draw_image(paths_axis$PYTHON, y = 3.2, scale = 0.3) + 
+    draw_image(paths_axis$OFFICE, y = 2.8, scale = 0.25) + 
+    draw_image(paths_axis$MONGODB, y = 2.42, scale = 0.65) + 
+    draw_image(paths_axis$GIT, y = 2.07, scale = 0.35) + 
+    draw_image(paths_axis$DOCKER, y = 1.65, scale = 0.45) + 
+    draw_image(paths_axis$CSS, y = 1.25, scale = 0.35) + 
+    draw_image(paths_axis$BOOSTRAP, y = 0.83, scale = 0.35) +
+    draw_image(paths_axis$AWS, y = 0.45, scale = 0.32) 
   
   PLOT <- ggdraw(plot = insert_yaxis_grob(plot = PLOT, grob = PIMAGE, position = "left")) #add the images in the y-axes
   
