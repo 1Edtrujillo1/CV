@@ -17,6 +17,7 @@ config <- config::get(file = "config.yml")
 
 # udeploy::mongo_Listread_or_write(do = "write",
 #                                  json_to_write = jsonlite::fromJSON("PERSONAL_INFORMATION.json"))
+
 udeploy::mongo_Listread_or_write(do = "read")
 
 #' @Regex: define the possible regex to get a text from string (an observation)
@@ -31,6 +32,8 @@ bracket_regex <- glue("^\\[{regex$regex_inside}\\]") #start with [text]
 join_regex <- glue("{regex$regex_left}\\[{regex$regex_inside}\\]\\(.*\\)(?:$|{regex$regex_after})") #text[text](text)no text|text
 
 # Dataset creation  -------------------------------------------------------
+
+vars_pagedown <- str_subset(string = names(json_information), pattern = "^(?!MYSELF).*") #everything except MYSELF
 
 #' @description
 #' 1.INFO_DF: with the help of the function *structure_df* that gets the dataset
@@ -74,10 +77,13 @@ join_regex <- glue("{regex$regex_left}\\[{regex$regex_inside}\\]\\(.*\\)(?:$|{re
 #' [TIME_LINE_PLOT]
 CREATING_DFS <- function(){
   
+  json_information_pagedown <- 
+    map(vars_pagedown, ~ pluck(json_information, .x)) %>% set_names(vars_pagedown)
+  
   vars_time <- c("START","END")
   vars_factor <- c("TYPE", "INSTITUTION")
   
-  INFO_DF <- map_df(names(json_information), structure_df) %>% as.data.table() %>% 
+  INFO_DF <- map_df(names(json_information_pagedown), structure_df) %>% as.data.table() %>% 
     .[,(vars_time):=lapply(.SD, as.Date), .SDcols = vars_time] %>% 
     .[,(vars_factor):=lapply(.SD, as.factor), .SDcols = vars_factor] %>% 
     .[,LABEL_POS:=START + floor((END - START)/2)] #to create the label in each line of time line plot
@@ -126,11 +132,14 @@ CREATING_DFS <- function(){
 #' @return A dataset with the information of the topic
 structure_df <- function(topic){
   
-  json_information_topic <- json_information[[topic]]
+  json_information_pagedown <- 
+    map(vars_pagedown, ~ pluck(json_information, .x)) %>% set_names(vars_pagedown)
+  
+  json_information_topic <- json_information_pagedown[[topic]]
   
   df <- data.table(
     
-    Type = str_subset(string = names(json_information), pattern = topic),
+    Type = str_subset(string = names(json_information_pagedown), pattern = topic),
     
     Title = json_information_topic[["TITLE"]],
     

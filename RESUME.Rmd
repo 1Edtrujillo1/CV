@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 source("parsing_functions.R")
 
 PAGEDOWN_DF <- CREATING_DFS()$PAGEDOWN_DF
+
+PERSONAL <- pluck(json_information, "MYSELF")
 ```
 
 Aside
@@ -28,24 +30,47 @@ Aside
 
 ## Contact Info
 
-- <i class="fas fa-globe-americas"></i> Mexican
+- <i class="fas fa-globe-americas"></i> 
+```{r, echo=FALSE}
+glue(PERSONAL$NATIONALITY)
+```
 
-- <i class="fas fa-male"></i> 24 years old
+- <i class="fas fa-male"></i> 
+```{r, echo=FALSE}
+glue(PERSONAL$AGE)
+```
 
-- <i class="fa fa-envelope"></i> act.jetv@gmail.com
+- <i class="fa fa-envelope"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$MAIL)
+```
 
-- <i class="fas fa-globe"></i> [AImagination.com](www.aijetv.com)
+- <i class="fas fa-globe"></i> 
+```{r, echo=FALSE}
+glue(PERSONAL$WEBPAGE)
+```
 
-- <i class="fa fa-phone"></i> +52 55 44 48 10 29
+- <i class="fa fa-phone"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$PHONE)
+```
 
-- <i class="fa fa-github"></i> [GitHub](https://github.com/1Edtrujillo1)
+- <i class="fa fa-github"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$GITHUB)
+```
 
-- <i class="fab fa-docker"></i> [DockerHub](https://hub.docker.com/u/1edtrujillo1)
+- <i class="fab fa-docker"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$DOCHERHUB)
+```
 
-- <i class="fab fa-r-project"></i> [Udeploy R-package](https://github.com/1Edtrujillo1/udeploy)
+- <i class="fab fa-r-project"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$RPACKAGE)
+```
 
 - For more information, please contact me via <strong>email</strong> or <strong>phone</strong>.
-
 
 Main
 ================================================================================
@@ -94,7 +119,10 @@ PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJ')
 
 ### Summary 
 
-<i class="fas fa-graduation-cap"></i> Bachelor Degree in Actuarial Science at [Universidad Nacional Autonoma de México](https://www.unam.mx/)
+<i class="fas fa-graduation-cap"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$BACHELOR)
+```
 
 - <i class="fab fa-r-project"></i> `R enthusiast` 
 
@@ -149,9 +177,15 @@ PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-- Watch some <i class="fas fa-users"></i> [**recommendation letters**](https://www.dropbox.com/sh/u1dr5se4brf55m2/AADKONJy60EgROnXlPBD8iXYa?dl=0)
+- Watch some <i class="fas fa-users"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$RECOMMENDATIONS)
+```
 
-- Code available on <i class="fa fa-github"></i> [GitHub](https://github.com/1Edtrujillo1/CV).
+- Code available on <i class="fa fa-github"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$CV)
+```
 
 :::
 
