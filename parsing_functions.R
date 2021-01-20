@@ -5,8 +5,19 @@ library(purrr)
 map(c("jsonlite","stringr", "data.table", "dplyr",
       "glue", "lubridate", "ggplot2","magick", 
       "pagedown", "scales", "cowplot", "usethis",
-      "devtools", "lares"), 
+      "devtools", "lares", "mongolite", "udeploy"), 
     require, character.only = TRUE)
+
+
+# Read Data ---------------------------------------------------------------
+
+Sys.setenv(R_CONFIG_ACTIVE = "db_cv")
+#Sys.getenv()
+config <- config::get(file = "config.yml")
+
+# udeploy::mongo_Listread_or_write(do = "write",
+#                                  json_to_write = jsonlite::fromJSON("PERSONAL_INFORMATION.json"))
+udeploy::mongo_Listread_or_write(do = "read")
 
 #' @Regex: define the possible regex to get a text from string (an observation)
 #' @Useful: in  HTTP_LINK and CREATING_DFS functions
@@ -63,8 +74,6 @@ join_regex <- glue("{regex$regex_left}\\[{regex$regex_inside}\\]\\(.*\\)(?:$|{re
 #' [TIME_LINE_PLOT]
 CREATING_DFS <- function(){
   
-  json_information <- jsonlite::fromJSON("PERSONAL_INFORMATION.json")
-  
   vars_time <- c("START","END")
   vars_factor <- c("TYPE", "INSTITUTION")
   
@@ -116,8 +125,6 @@ CREATING_DFS <- function(){
 #' @param topic from the JSON file (personal information of each topic)
 #' @return A dataset with the information of the topic
 structure_df <- function(topic){
-  
-  json_information <- jsonlite::fromJSON("PERSONAL_INFORMATION.json")
   
   json_information_topic <- json_information[[topic]]
   
