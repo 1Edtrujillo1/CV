@@ -13,20 +13,20 @@ knit: pagedown::chrome_print
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
-  results='asis',  #formato de añadir info a la derecha
-  echo = FALSE
-)
+  results='asis',  #format to add info to the right.
+  echo = FALSE)
+
 source("parsing_functions.R")
 
-PAGEDOWN_DF <- CREATING_DFS()$PAGEDOWN_DF
+PAGEDOWN_DF <- pluck(CREATING_DFS(), "PAGEDOWN_DF")
 
-PERSONAL <- pluck(json_information, "MYSELF")
+PERSONAL <- pull_info[,MYSELF] %>% pluck(1)
 ```
 
 Aside
 ================================================================================
 
-![logo](IMAGES/yo.png){width=100%}
+![logo](RESUME_IMAGES/yo.png){width=100%}
 
 ## Contact Info
 
@@ -40,19 +40,19 @@ glue(PERSONAL$NATIONALITY)
 glue(PERSONAL$AGE)
 ```
 
+- <i class="fa fa-phone"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$PHONE)
+```
+
 - <i class="fa fa-envelope"></i>
 ```{r, echo=FALSE}
 glue(PERSONAL$MAIL)
 ```
 
-- <i class="fas fa-globe"></i> 
+- <i class="fab fa-linkedin"></i> 
 ```{r, echo=FALSE}
-glue(PERSONAL$WEBPAGE)
-```
-
-- <i class="fa fa-phone"></i>
-```{r, echo=FALSE}
-glue(PERSONAL$PHONE)
+glue(PERSONAL$LINKEDIN)
 ```
 
 - <i class="fa fa-github"></i>
@@ -65,9 +65,19 @@ glue(PERSONAL$GITHUB)
 glue(PERSONAL$DOCHERHUB)
 ```
 
+- <i class="fas fa-globe"></i> 
+```{r, echo=FALSE}
+glue(PERSONAL$WEBPAGE)
+```
+
 - <i class="fab fa-r-project"></i>
 ```{r, echo=FALSE}
 glue(PERSONAL$RPACKAGE)
+```
+
+- <i class="fab fa-dochub"></i>
+```{r, echo=FALSE}
+glue(PERSONAL$DOCKERFILE)
 ```
 
 - For more information, please contact me via <strong>email</strong> or <strong>phone</strong>.
@@ -90,19 +100,13 @@ Work Experience {data-icon=briefcase}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
 ```
 
-Publications {data-icon=book-open}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('PUBL')
-```
-
 ::: aside
 
 <br><br><br><br><br><br>
 
 ### Skills 
 ```{r echo=FALSE, out.width="300%"}
-knitr::include_graphics("IMAGES/plot.png")
+knitr::include_graphics("RESUME_IMAGES/plot.png")
 ```
 
 ::: 
@@ -128,7 +132,7 @@ glue(PERSONAL$BACHELOR)
 
 -
 ```{r echo=FALSE, out.width="7%"}
-knitr::include_graphics("IMAGES/persistent.png")
+knitr::include_graphics("RESUME_IMAGES/persistent.png")
 ```
 `Persistent`
 
@@ -136,36 +140,42 @@ knitr::include_graphics("IMAGES/persistent.png")
 
 - 
 ```{r echo=FALSE, out.width="8%"}
-knitr::include_graphics("IMAGES/good_teammate.png")
+knitr::include_graphics("RESUME_IMAGES/good_teammate.png")
 ```
 `Good teammate`
 
 - 
 ```{r echo=FALSE, out.width="8%"}
-knitr::include_graphics("IMAGES/commited.png")
+knitr::include_graphics("RESUME_IMAGES/commited.png")
 ```
 `Commited`
 
 -
 ```{r echo=FALSE, out.width="8%"}
-knitr::include_graphics("IMAGES/honest.png")
+knitr::include_graphics("RESUME_IMAGES/honest.png")
 ```
 `Honest`
 
-<br><br><br><br><br><br><br><br><br><br>
+<br><br>
 
 ### Language Skills 
 ```{r echo=FALSE, out.width="10%"}
-knitr::include_graphics("IMAGES/mexican_flag.png")
+knitr::include_graphics("RESUME_IMAGES/mexican_flag.png")
 ```
 **Spanish:** Native
 
 ```{r echo=FALSE, out.width="10%"}
-knitr::include_graphics("IMAGES/england_flag.png")
+knitr::include_graphics("RESUME_IMAGES/england_flag.png")
 ```
 **English:** Proficient
 
 :::
+
+Publications {data-icon=book-open}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('PUBL')
+```
 
 Certifications {data-icon=award}
 --------------------------------------------------------------------------------
@@ -173,11 +183,18 @@ Certifications {data-icon=award}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
 ```
 
+Timeline {data-icon=chart-line}
+--------------------------------------------------------------------------------
+```{r, echo=FALSE, warning=FALSE}
+TIME_LINE_PLOT (titulo = "Curriculum Vitae Timeline",
+                subtitulo = "Jorge Eduardo Trujillo Velázquez")
+```
+
 ::: aside
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
 
-- Watch some <i class="fas fa-users"></i>
+- Watch my <i class="fas fa-users"></i>
 ```{r, echo=FALSE}
 glue(PERSONAL$RECOMMENDATIONS)
 ```
@@ -188,11 +205,3 @@ glue(PERSONAL$CV)
 ```
 
 :::
-
-Timeline {data-icon=chart-line}
---------------------------------------------------------------------------------
-```{r, echo=FALSE, warning=FALSE}
-TIME_LINE_PLOT (titulo = "Curriculum Vitae Timeline",
-                subtitulo = "Jorge Eduardo Trujillo Velázquez")
-```
-

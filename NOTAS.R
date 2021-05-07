@@ -36,3 +36,6 @@
 # PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDU')
 
 # <br><br> representa espacio entre dos partes
+
+
+# "At the en of the main part is going to be an aside part."
