@@ -214,7 +214,7 @@ CREATING_DFS()$PAGEDOWN_DF %>% SECTION_PAGEDOWN(type = 'EDU')
 #' size = 7 size of each line
 #' After that we use facet_grid to bring the plots of each topic (type), 
 #' Next include the name of the title and subtitle that we want(specified in the 
-#' firm of the function), after that theme_lares2 put the title and subtitle in 
+#' firm of the function), after that theme_lares put the title and subtitle in 
 #' a beautiful letter.
 #' Each line need to have an explicit label = INSTITUTION of each observation
 #' with the help of the geom_label located in x = LABEL_POS (that we defined in 
@@ -245,7 +245,7 @@ TIME_LINE_PLOT <- function(titulo, subtitulo){
          x = NULL,
          y = NULL) + 
     
-    lares::theme_lares2()  + #pondra letra bonita
+    lares::theme_lares()  + #pondra letra bonita
     
     geom_label(aes(x = LABEL_POS), colour = "black", size = 1.8, alpha = 0.3) +  #label in each line
     

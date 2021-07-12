@@ -16,7 +16,7 @@
 
 # install.packages("usethis")
 # install.packages('devtools')
-# devtools::install_github("laresbernardo/lares")
+# devtools::install_github("laresbernardo/lares") #NOW IT IS IN CRAN
 
 #library(pagedown) package to create our CV
 #library(magick) package to import images
@@ -29,13 +29,21 @@
 # k <- structure_df(topic = "EDU")
 # k
 
-#######################################################
-
-
-# PAGEDOWN_DF <- CREATING_DFS()$PAGEDOWN_DF
-# PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDU')
-
 # <br><br> representa espacio entre dos partes
 
-
 # "At the en of the main part is going to be an aside part."
+
+#######################################################
+
+# RECOMENDATIONS TO USE PAGEDOWN:
+
+#1. Install miktex (laTEX distribution for Windows) that helps us to create pdf´s cientific papers.
+#2. Install correct version of pandoc, to use pagedown it is necessary that Pandoc >= 2.2.3
+# 2.1 Check version on computer rmarkdown::pandoc_version()
+# 2.2 Correct version 2.7.3 (install on https://www.npackd.org/p/pandoc64/2.7.3)
+# 2.3 If we are using Anaconda distribution, uninstall its pandoc version (so we can be able to use ours)
+# and delete the one on rstudio (in a r-studio windows folder)
+# and after that reinstall again jupyter and spyder (conda install jupyter)
+
+
+
