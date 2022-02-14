@@ -12,16 +12,21 @@ map(c("udeploy", "config", "jsonlite",
     require, character.only = TRUE)
 
 # 2.0 Read Data -----------------------------------------------------------
-Sys.setenv(R_CONFIG_ACTIVE = "db_cv")
+## Sys.setenv(R_CONFIG_ACTIVE = "db_cv") --
 #Sys.getenv()
-config <- config::get(file = "config.yml")
+## config <- config::get(file = "config.yml") --
 
 # udeploy::mongo_manipulation(
 #   mongo_choice = "push",
 #   push_record = map(jsonlite::fromJSON("RESUME_IMAGES/PERSONAL_INFORMATION.json"),
 #                     ~ .x %>% as.data.table())
 # )
-udeploy::mongo_manipulation(mongo_choice = "pull")
+## udeploy::mongo_manipulation(mongo_choice = "pull") --
+
+###---###
+pull_info <- map(jsonlite::fromJSON("RESUME_IMAGES/PERSONAL_INFORMATION.json"),
+                 ~ .x %>% as.data.table())
+###---###
 
 #' @Regex: define the possible regex to get a text from string (an observation)
 #' @Useful: in  HTTP_LINK and CREATING_DFS functions
@@ -74,12 +79,14 @@ join_regex <- str_glue("{regex$regex_left}\\[{regex$regex_inside}\\]\\(.*\\){reg
 #' [TIME_LINE_PLOT]
 CREATING_DFS <- function(){
   
-  pull_info_dfs <- pull_info[,-"MYSELF"]
+  ## pull_info_dfs <- pull_info[,-"MYSELF"] --
   
-  pull_info_dfs <- map(names(pull_info_dfs), 
-                       ~ pull_info_dfs[,eval(parse(text = .x))] %>% pluck(1) %>% 
-                         as.data.table() %>% .[,TYPE:= .x]) %>% 
-    rbindlist()
+  # pull_info_dfs <- map(names(pull_info_dfs), 
+  #                      ~ pull_info_dfs[,eval(parse(text = .x))] %>% pluck(1) %>% 
+  #                        as.data.table() %>% .[,TYPE:= .x]) %>% 
+  #   rbindlist() --
+  
+  pull_info_dfs <- pull_info[2:length(pull_info)] %>% rbindlist(idcol = "TYPE")
   
   vars_time <- c("START","END")
   vars_factor <- c("TYPE", "INSTITUTION")

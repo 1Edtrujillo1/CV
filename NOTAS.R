@@ -37,7 +37,7 @@
 
 # RECOMENDATIONS TO USE PAGEDOWN:
 
-#1. Install miktex (laTEX distribution for Windows) that helps us to create pdf´s cientific papers.
+#1. Install miktex (laTEX distribution for Windows) that helps us to create pdfÂ´s cientific papers.
 #2. Install correct version of pandoc, to use pagedown it is necessary that Pandoc >= 2.2.3
 # 2.1 Check version on computer rmarkdown::pandoc_version()
 # 2.2 Correct version 2.7.3 (install on https://www.npackd.org/p/pandoc64/2.7.3)

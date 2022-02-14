@@ -11,16 +11,17 @@ output:
 knit: pagedown::chrome_print
 ---
 
-```{r, include=FALSE}
+```{r, include=FALSE, warning = FALSE}
 knitr::opts_chunk$set(
   results='asis',  #format to add info to the right.
   echo = FALSE)
-
+rmarkdown::find_pandoc(version = "2.7.3")
 source("parsing_functions.R")
 
 PAGEDOWN_DF <- pluck(CREATING_DFS(), "PAGEDOWN_DF")
 
-PERSONAL <- pull_info[,MYSELF] %>% pluck(1)
+# PERSONAL <- pull_info[,MYSELF] %>% pluck(1) --
+PERSONAL <- pull_info %>% pluck("MYSELF")
 ```
 
 Aside
@@ -171,6 +172,7 @@ knitr::include_graphics("RESUME_IMAGES/england_flag.png")
 
 :::
 
+
 Publications {data-icon=book-open}
 --------------------------------------------------------------------------------
 ```{r,echo=FALSE}
@@ -183,16 +185,7 @@ Certifications {data-icon=award}
 PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
 ```
 
-Timeline {data-icon=chart-line}
---------------------------------------------------------------------------------
-```{r, echo=FALSE, warning=FALSE}
-TIME_LINE_PLOT (titulo = "Curriculum Vitae Timeline",
-                subtitulo = "Jorge Eduardo Trujillo Velázquez")
-```
-
 ::: aside
-
-<br><br><br><br><br><br>
 
 - Watch my <i class="fas fa-users"></i>
 ```{r, echo=FALSE}
@@ -205,3 +198,11 @@ glue(PERSONAL$CV)
 ```
 
 :::
+
+Timeline {data-icon=chart-line}
+--------------------------------------------------------------------------------
+```{r, echo=FALSE, warning=FALSE}
+TIME_LINE_PLOT (titulo = "Curriculum Vitae Timeline",
+                subtitulo = "Jorge Eduardo Trujillo Velázquez")
+```
+
