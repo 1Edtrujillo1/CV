@@ -19,27 +19,14 @@ rmarkdown::find_pandoc(version = "2.7.3")
 source("parsing_functions.R")
 
 PAGEDOWN_DF <- pluck(CREATING_DFS(), "PAGEDOWN_DF")
-
-# PERSONAL <- pull_info[,MYSELF] %>% pluck(1) --
 PERSONAL <- pull_info %>% pluck("MYSELF")
+HIGHLIGHTS <- pull_info %>% pluck("HIGHLIGHTS")
 ```
 
 Aside
 ================================================================================
 
-![logo](RESUME_IMAGES/yo.png){width=100%}
-
 ## Contact Info
-
-- <i class="fas fa-globe-americas"></i> 
-```{r, echo=FALSE}
-glue(PERSONAL$NATIONALITY)
-```
-
-- <i class="fas fa-male"></i> 
-```{r, echo=FALSE}
-glue(PERSONAL$AGE)
-```
 
 - <i class="fa fa-phone"></i>
 ```{r, echo=FALSE}
@@ -66,70 +53,26 @@ glue(PERSONAL$GITHUB)
 glue(PERSONAL$DOCHERHUB)
 ```
 
-- <i class="fas fa-globe"></i> 
+- Watch my <i class="fas fa-users"></i>
 ```{r, echo=FALSE}
-glue(PERSONAL$WEBPAGE)
+glue(PERSONAL$RECOMMENDATIONS)
 ```
 
-- <i class="fab fa-r-project"></i>
-```{r, echo=FALSE}
-glue(PERSONAL$RPACKAGE)
+## Languages 
+
+- 
+```{r echo=FALSE, out.width="10%"}
+knitr::include_graphics("RESUME_IMAGES/mexican_flag.png")
 ```
+**Spanish:** Native
 
-- <i class="fab fa-dochub"></i>
-```{r, echo=FALSE}
-glue(PERSONAL$DOCKERFILE)
+- 
+```{r echo=FALSE, out.width="10%"}
+knitr::include_graphics("RESUME_IMAGES/england_flag.png")
 ```
+**English:** Proficient
 
-- For more information, please contact me via <strong>email</strong> or <strong>phone</strong>.
-
-Main
-================================================================================
-
-Jorge Eduardo Trujillo Velázquez {#title}
---------------------------------------------------------------------------------
-
-Education {data-icon=graduation-cap data-concise=true}
---------------------------------------------------------------------------------
-```{r, echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDU')
-```
-
-Work Experience {data-icon=briefcase}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
-```
-
-::: aside
-
-<br><br><br><br><br><br>
-
-### Skills 
-```{r echo=FALSE, out.width="300%"}
-knitr::include_graphics("RESUME_IMAGES/plot.png")
-```
-
-::: 
-
-Projects {data-icon=laptop}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('PROJ')
-```
-
-::: aside
-
-<br><br><br>
-
-### Summary 
-
-<i class="fas fa-graduation-cap"></i>
-```{r, echo=FALSE}
-glue(PERSONAL$BACHELOR)
-```
-
-- <i class="fab fa-r-project"></i> `R enthusiast` 
+## Soft Skills
 
 -
 ```{r echo=FALSE, out.width="7%"}
@@ -137,7 +80,7 @@ knitr::include_graphics("RESUME_IMAGES/persistent.png")
 ```
 `Persistent`
 
-- <i class="far fa-address-book"></i> `Orginized`
+- <i class="far fa-address-book"></i> `Organized`
 
 - 
 ```{r echo=FALSE, out.width="8%"}
@@ -149,7 +92,7 @@ knitr::include_graphics("RESUME_IMAGES/good_teammate.png")
 ```{r echo=FALSE, out.width="8%"}
 knitr::include_graphics("RESUME_IMAGES/commited.png")
 ```
-`Commited`
+`Committed`
 
 -
 ```{r echo=FALSE, out.width="8%"}
@@ -157,45 +100,76 @@ knitr::include_graphics("RESUME_IMAGES/honest.png")
 ```
 `Honest`
 
+## Technical Skills 
+```{r echo=FALSE, out.width="300%"}
+knitr::include_graphics("RESUME_IMAGES/plot.png")
+```
+
+Main
+================================================================================
+
+Jorge Eduardo Trujillo Velázquez {#title}
+--------------------------------------------------------------------------------
+
 <br><br>
 
-### Language Skills 
-```{r echo=FALSE, out.width="10%"}
-knitr::include_graphics("RESUME_IMAGES/mexican_flag.png")
+```{r, echo=FALSE}
+glue(PERSONAL$DESCRIPTION)
 ```
-**Spanish:** Native
 
-```{r echo=FALSE, out.width="10%"}
-knitr::include_graphics("RESUME_IMAGES/england_flag.png")
-```
-**English:** Proficient
-
-:::
-
-
-Publications {data-icon=book-open}
+Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('PUBL')
-```
-
-Certifications {data-icon=award}
---------------------------------------------------------------------------------
-```{r,echo=FALSE}
-PAGEDOWN_DF %>% SECTION_PAGEDOWN('CERT')
+```{r, echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('EDUCATION')
 ```
 
 ::: aside
 
-- Watch my <i class="fas fa-users"></i>
-```{r, echo=FALSE}
-glue(PERSONAL$RECOMMENDATIONS)
+### PROJECTS
+
+<br>
+
+```{r,  echo=FALSE}
+glue(paste("- ", "<i class='fas fa-graduation-cap'></i>", unique(HIGHLIGHTS$PROJECTS), collapse = "\n\n\n"))
 ```
 
-- Code available on <i class="fa fa-github"></i>
-```{r, echo=FALSE}
-glue(PERSONAL$CV)
+:::
+
+Work Experience {data-icon=briefcase}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('WORK')
 ```
+
+::: aside
+
+### CERTIFICATES
+
+<br>
+
+```{r,  echo=FALSE}
+glue(paste("- ", "<i class='fas fa-award'></i>", unique(HIGHLIGHTS$CERTIFICATES), collapse = "\n\n\n"))
+```
+
+
+:::
+
+Volunteer Experience {data-icon=handshake}
+--------------------------------------------------------------------------------
+```{r,echo=FALSE}
+PAGEDOWN_DF %>% SECTION_PAGEDOWN('VOLUNTEER')
+```
+
+::: aside
+
+### PUBLICATIONS
+
+<br>
+
+```{r,  echo=FALSE}
+glue(paste("- ", "<i class='fas fa-book-open'></i>", unique(HIGHLIGHTS$PUBLICATIONS), collapse = "\n\n\n"))
+```
+
 
 :::
 
@@ -205,4 +179,5 @@ Timeline {data-icon=chart-line}
 TIME_LINE_PLOT (titulo = "Curriculum Vitae Timeline",
                 subtitulo = "Jorge Eduardo Trujillo Velázquez")
 ```
+
 

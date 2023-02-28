@@ -1,3 +1,12 @@
+p {
+  text-align: justify;
+  font-size: xx-small;
+}
+
+li {
+  font-size: xx-small;
+}
+
 /* When in PDF export mode make sure superscripts are nice and small and italic */
 sup {
   font-size: 0.45rem;

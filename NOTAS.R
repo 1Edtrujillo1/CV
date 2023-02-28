@@ -10,7 +10,7 @@
 
 #Usig emojis as icons in ggplot: https://www.statworx.com/ch/blog/using-emojis-and-png-as-icons-in-your-ggplot/
 
-# Crate stickers with R: https://cran.r-project.org/web/packages/magick/vignettes/intro.html
+# Create stickers with R: https://cran.r-project.org/web/packages/magick/vignettes/intro.html
 
 #<br><br> make separations in the web page
 
@@ -25,9 +25,6 @@
 #library(lares) package to use theme_lares2()  for plots
 
 ########################################################
-
-# k <- structure_df(topic = "EDU")
-# k
 
 # <br><br> representa espacio entre dos partes
 
@@ -45,5 +42,19 @@
 # and delete the one on rstudio (in a r-studio windows folder)
 # and after that reinstall again jupyter and spyder (conda install jupyter)
 
+# rmarkdown::render("path/to/document.Rmd")  rmarkdown::render("RESUME.Rmd")
+# psycModel::html_to_pdf(file_path = "RESUME.html")
 
 
+
+
+## Sys.setenv(R_CONFIG_ACTIVE = "db_cv") --
+#Sys.getenv()
+## config <- config::get(file = "config.yml") --
+
+# udeploy::mongo_manipulation(
+#   mongo_choice = "push",
+#   push_record = map(jsonlite::fromJSON("RESUME_IMAGES/PERSONAL_INFORMATION.json"),
+#                     ~ .x %>% as.data.table())
+# )
+## udeploy::mongo_manipulation(mongo_choice = "pull") --

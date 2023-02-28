@@ -2,47 +2,38 @@
 # 1.0 Load Packages -------------------------------------------------------
 rm(list = ls())
 
-library(purrr)
+library(furrr)
 
-map(c("udeploy", "config", "jsonlite", 
-      "mongolite", "data.table", "stringr",
-      "lubridate", "dplyr", "glue", 
-      "ggplot2", "lares", "scales",
-      "cowplot", "pagedown"), 
-    require, character.only = TRUE)
+furrr::future_map(
+  c("udeploy", "tidyverse", "jsonlite",
+    "glue", "data.table", "ggplot2", 
+    "lares", "scales", "cowplot", 
+    "pagedown"),
+  require, 
+  character.only = TRUE
+)
 
 # 2.0 Read Data -----------------------------------------------------------
-## Sys.setenv(R_CONFIG_ACTIVE = "db_cv") --
-#Sys.getenv()
-## config <- config::get(file = "config.yml") --
 
-# udeploy::mongo_manipulation(
-#   mongo_choice = "push",
-#   push_record = map(jsonlite::fromJSON("RESUME_IMAGES/PERSONAL_INFORMATION.json"),
-#                     ~ .x %>% as.data.table())
-# )
-## udeploy::mongo_manipulation(mongo_choice = "pull") --
-
-###---###
-pull_info <- map(jsonlite::fromJSON("RESUME_IMAGES/PERSONAL_INFORMATION.json"),
-                 ~ .x %>% as.data.table())
-###---###
+pull_info <- furrr::future_map(jsonlite::fromJSON("RESUME_IMAGES/PERSONAL_INFORMATION.json"),
+                               ~ .x %>% as.data.table())
 
 #' @Regex: define the possible regex to get a text from string (an observation)
 #' @Useful: in  HTTP_LINK and CREATING_DFS functions
-regex <- map2(list("\\[", c("\\[", "\\]"), "\\)"), #everything before [, everything between [], #everything after )
+regex <- map2(list("\\[", c("\\[", "\\]"), "\\)"), #everything before [, everything between [], everything after )
               c("before_pattern", "between_pattern", "after_pattern"),
               ~udeploy::obtain_regex(pattern = .x, return_regex = .y)) %>% 
   set_names("regex_left", "regex_inside", "regex_after")
 
 bracket_regex <- udeploy::obtain_regex(pattern = pluck(regex, "regex_inside"),  #start with [text]
                                        return_regex = "starts_with_pattern") 
-join_regex <- str_glue("{regex$regex_left}\\[{regex$regex_inside}\\]\\(.*\\){regex$regex_after}") #"text"["text"]("text")"no text"|"text"
+
+join_regex <- str_glue("{regex$regex_left}\\[{regex$regex_inside}\\]\\(.*\\){regex$regex_after}") #text[text](text)"no text|text" for description column.
 
 # 3.0 Dataset Creation ----------------------------------------------------
 
 #' @description
-#' 1.pull_info_dfs: dataset of each topic/TYPE where is obtain from a mongodb.
+#' 1.pull_info_dfs: dataset of each topic/TYPE.
 #' - if an observation = "today" of date variables, then we put the date of today.
 #' - Adjust the uppercase with the help of the function *HTTP_LINK*
 #' -new variable LABEL_POS is the mean from the START and the END date, with the 
@@ -81,12 +72,7 @@ CREATING_DFS <- function(){
   
   ## pull_info_dfs <- pull_info[,-"MYSELF"] --
   
-  # pull_info_dfs <- map(names(pull_info_dfs), 
-  #                      ~ pull_info_dfs[,eval(parse(text = .x))] %>% pluck(1) %>% 
-  #                        as.data.table() %>% .[,TYPE:= .x]) %>% 
-  #   rbindlist() --
-  
-  pull_info_dfs <- pull_info[2:length(pull_info)] %>% rbindlist(idcol = "TYPE")
+  pull_info_dfs <- pull_info[3:length(pull_info)] %>% rbindlist(idcol = "TYPE")
   
   vars_time <- c("START","END")
   vars_factor <- c("TYPE", "INSTITUTION")
@@ -95,7 +81,6 @@ CREATING_DFS <- function(){
        ~ pull_info_dfs[,(.x):=str_replace_all(string = eval(parse(text = .x)),
                                               pattern = "today",
                                               replacement = as.character(Sys.Date()))] %>% 
-         setnames(toupper(names(.))) %>% 
          .[,lapply(.SD, as.character), .SDcols = names(.)]
   ) 
   walk(names(pull_info_dfs), 
@@ -121,9 +106,9 @@ CREATING_DFS <- function(){
     .[,(vars_replacements):=lapply(.SD, as.character),.SDcols = vars_replacements]
   
   walk(vars_replacements, function(i){
-    TIME_LINE_DF[,(i):= map(pluck(regex, "regex_inside"), 
-                            ~ list(.x, udeploy::obtain_regex(pattern = .x, 
-                                                             return_regex = "not_contains_pattern"))) %>% 
+    TIME_LINE_DF[,(i):= future_map(pluck(regex, "regex_inside"), 
+                                   ~ list(.x, udeploy::obtain_regex(pattern = .x, 
+                                                                    return_regex = "not_contains_pattern"))) %>% 
                    unlist() %>% udeploy::obtain_regex(return_regex = "or") %>% 
                    str_extract(string = TIME_LINE_DF[,eval(parse(text = i))])
     ] %>% .[,':='(POS = rep(seq(from = 1, to = pull_info_dfs[,.N], by = 1), 2),
@@ -154,11 +139,11 @@ CREATING_DFS <- function(){
 #' uppercase based on restrictive conditions
 HTTP_LINK <- function(df_variable){
   
-  map_chr(df_variable, function(df_variable){
+  furrr::future_map_chr(df_variable, function(df_variable){
     
-    uppercase <- map(regex,
-                     ~str_extract(string = df_variable, pattern = .x)) %>% 
-      map(~toupper(.x)) 
+    uppercase <- furrr::future_map(regex,
+                                   ~str_extract(string = df_variable, pattern = .x)) %>% 
+      furrr::future_map(~toupper(.x)) 
     
     if(str_detect(string = df_variable, 
                   pattern = bracket_regex)){
@@ -168,7 +153,7 @@ HTTP_LINK <- function(df_variable){
                                      replacement = uppercase$regex_inside)
       
     }else if(str_detect(string = df_variable, 
-                        pattern = join_regex)){
+                        pattern = join_regex)){ #description
       
       df_variable <- str_replace(string = df_variable, 
                                  pattern = regex$regex_left,
@@ -182,7 +167,7 @@ HTTP_LINK <- function(df_variable){
     }else df_variable <- toupper(df_variable)
   }) %>% return()
 }
-#HTTP_LINK(df_variable = df$DESCRIPTION)
+#HTTP_LINK(df_variable = pull_info_dfs$DESCRIPTION)
 
 # 4.0 Pagedown Format -----------------------------------------------------
 
@@ -295,13 +280,11 @@ SKILLS_PLOT <- function(){
   options(warn = -1)
   
   DF_SKILLS <- data.table(
-    SKILLS = map2(list(c("SPARK", "OFFICE"), 
-                       c("BOOSTRAP", "CSS", "GIT", 
-                         "DOCKER", "AWS", "PYTHON", 
-                         "SQL", "SHELL", "MONGODB"),
-                       c("R", "SHINY", "RMARKDOWN")),
-                  3:5, function(i,j)
-                    map(i, ~rep(.x, j)) %>% flatten_chr()) %>% flatten_chr() %>% 
+    SKILLS = future_map2(list(c("AIRFLOW", "KAFKA", "DOCKER", "MONGODB"),
+                              c("GIT", "AWS", "PYSPARK", "SHELL", "CSS"),
+                              c("PYTHON", "SQL", "R", "RSHINY")),
+                         3:5, function(i,j)
+                           future_map(i, ~rep(.x, j)) %>% flatten_chr()) %>% flatten_chr() %>% 
       as.factor()) %>% 
     .[,ID:=1:.N, by = "SKILLS"]
   
@@ -321,25 +304,27 @@ SKILLS_PLOT <- function(){
     geom_hline(aes(yintercept = 6), linetype = 3, size = 2, col = "#689fff") + 
     geom_text(aes(label = PERCENTAGE), position = position_nudge(y = + 0.8), color = "#142ae8") + #add the text of the percentages
     coord_flip() + #flip the axes
-    theme_void() + 
-    theme(panel.background = element_rect(fill = '#f7fbff')) #background color
+    labs(x = NULL, y = NULL) + 
+    theme(panel.background = element_rect(fill = '#f7fbff'), #background color
+          plot.background = element_rect(fill = '#f7fbff')) #plot color
   
-  abilities <- c("sql", "spark", "shiny", "shell", "markdown", 
-                 "R", "python", "office","mongoDB",  "git", 
-                 "docker", "css", "boostrap", "aws")
+  abilities <- c("SQL", "SHELL", "RSHINY", "R", "PYTHON", "PYSPARK",
+                 "MONGODB", "KAFKA", "GIT", "DOCKER", "CSS", "AWS",
+                 "AIRFLOW")
   
   paths_axis <- str_glue("RESUME_IMAGES/{abilities}.png") %>% as.list() %>% 
     set_names(abilities)
   
   PIMAGE <- cowplot::axis_canvas(plot = PLOT, axis = 'y') +  
     pmap(list(paths_axis,
-              c(5.55, 5.15, 4.8, 4.4, 4.0, 
-                3.6, 3.2, 2.8, 2.42, 2.07, 
-                1.65, 1.25, 0.83, 0.45),
-              c(rep(0.4, 2), 0.35, 0.33, 0.35, 
-                rep(0.3, 2), 0.25, 0.65, 0.35, 
-                0.45, rep(0.35, 2), 0.32)),
+              c(5.5, 5.1, 4.7, 4.2, 
+                3.8, 3.3, 2.9, 2.5, 2.1, 
+                1.7, 1.3, 0.9, 0.5),
+              c(0.33, 0.33, 0.28, 0.28, 
+                0.28, 0.38, 0.48, 0.25, 0.28, 
+                0.31, 0.30, 0.27, 0.25)),
          ~ cowplot::draw_image(..1, y = ..2, scale = ..3))
+  
   
   PLOT <- cowplot::ggdraw(plot = insert_yaxis_grob(plot = PLOT, 
                                                    grob = PIMAGE, 
